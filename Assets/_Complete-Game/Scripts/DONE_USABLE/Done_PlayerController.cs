@@ -11,21 +11,20 @@ public class Done_Boundary
 
 public class Done_PlayerController : ITickable, IFixedTickable
 {
+	#region Properties
+
 	public float speed;
 	public float tilt;
 	public Done_Boundary boundary;
-
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
-
 	public Rigidbody myBody;
-
 	public AudioSource audioSource;
-	
 	private float nextFire;
-
 	private DiContainer diContainer;
+
+	#endregion
 
 	#region Zenject functions
 

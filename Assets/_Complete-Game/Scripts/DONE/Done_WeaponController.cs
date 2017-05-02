@@ -5,6 +5,8 @@ using Zenject;
 
 public class Done_WeaponController : IInitializable
 {
+	#region Properties
+	
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
@@ -14,14 +16,23 @@ public class Done_WeaponController : IInitializable
 
 	private DiContainer diContainer;
 
+	#endregion
+
+	#region Zenject functions
 	public void Initialize()
 	{
 		InvokeRepeating ("Fire", delay, fireRate);
 	}
+
+	#endregion
+
+	#region Class functions
 
 	void Fire ()
 	{
 		diContainer.InstantiatePrefab(shot); //TODO: PoolManager
 		audioSource.Play();
 	}
+
+	#endregion
 }
