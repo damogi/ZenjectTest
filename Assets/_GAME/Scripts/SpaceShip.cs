@@ -9,6 +9,8 @@ public class SpaceShip : MonoBehaviour {
 
     [Inject]
     private PlayerInput playerInput;
+    [Inject]
+    private PlayerAiming playerAiming;
 
     //Cached components
     [SerializeField]
@@ -20,12 +22,14 @@ public class SpaceShip : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        Move();
+
         if (playerInput.isShooting)
         {
             Shoot();
         }
 
-        rigidbody.velocity = playerInput.movement;
+        Rotate();
     }
 
     #endregion
@@ -35,6 +39,18 @@ public class SpaceShip : MonoBehaviour {
     private void Shoot()
     {
         Debug.Log("Shoot");
+    }
+
+    private void Move()
+    {
+        rigidbody.velocity = playerInput.movement;
+    }
+
+    private void Rotate()
+    {
+        playerAiming.actualPosition = transform.position;
+
+        transform.LookAt(playerAiming.actualPosition + playerAiming.targetPosition, Vector3.up);
     }
 
     #endregion

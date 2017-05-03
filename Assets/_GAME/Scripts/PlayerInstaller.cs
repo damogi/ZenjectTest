@@ -8,8 +8,15 @@ public class PlayerInstaller : MonoInstaller
 
     private void PlayerInputInstall()
     {
-        Container.Bind<PlayerInput>().AsSingle().NonLazy();
+        Container.Bind<PlayerInput>().AsSingle();
         Container.Bind<IFixedTickable>().To<PlayerInput>().AsSingle().NonLazy();
+    }
+
+    private void PlayerAimingInstall()
+    {
+        Container.Bind<PlayerAiming>().AsSingle();
+        Container.Bind<IInitializable>().To<PlayerAiming>().AsSingle().NonLazy();
+        Container.Bind<ITickable>().To<PlayerAiming>().AsSingle().NonLazy();
     }
 
     #endregion
@@ -17,5 +24,6 @@ public class PlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         PlayerInputInstall();
+        PlayerAimingInstall();
     }
 }
