@@ -11,16 +11,12 @@ public class SpaceShip : MonoBehaviour {
     private PlayerInput playerInput;
 
     //Cached components
+    [SerializeField]
     private new Rigidbody rigidbody;
 
     #endregion
 
     #region Unity functions
-
-    private void Awake()
-    {
-        rigidbody = GetComponent<Rigidbody>();
-    }
 
     private void FixedUpdate()
     {

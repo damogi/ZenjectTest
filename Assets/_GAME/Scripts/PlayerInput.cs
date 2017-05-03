@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Zenject;
@@ -7,9 +8,9 @@ public class PlayerInput: IFixedTickable
 {
     #region Properties
 
-    //Movement
-    public float speed;
+    public float speed = 10f;
 
+    //Movement
     public float horizontalMovement;
     public float verticalMovement;
 
@@ -22,17 +23,12 @@ public class PlayerInput: IFixedTickable
 
     #region Zenject functions
 
-    public PlayerInput(float speed)
-    {
-        this.speed = speed;
-    }
-
     public void FixedTick()
     {
-        horizontalMovement = Input.GetAxis("Horizotal");
+        horizontalMovement = Input.GetAxis("Horizontal");
         verticalMovement = Input.GetAxis("Vertical");
 
-        movement = new Vector3(horizontalMovement, 0.0f, verticalMovement);
+        movement = new Vector3(horizontalMovement, verticalMovement, 0f) * speed;
 
         isShooting = Input.GetKeyDown(KeyCode.Space);
     }

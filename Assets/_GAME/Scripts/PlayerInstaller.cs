@@ -1,17 +1,21 @@
 using System;
+using UnityEngine;
 using Zenject;
 
-public class PlayerInstaller : ScriptableObjectInstaller<PlayerInstaller>
-{
-    public override void InstallBindings()
+public class PlayerInstaller : MonoInstaller
+{   
+    #region Install functions
+
+    private void PlayerInputInstall()
     {
-        Container.Bind<PlayerInput>().AsSingle().WithArguments(PlayerInputSettings.speed);
-        Container.Bind<IFixedTickable>().To<PlayerInput>().AsSingle();
+        Container.Bind<PlayerInput>().AsSingle().NonLazy();
+        Container.Bind<IFixedTickable>().To<PlayerInput>().AsSingle().NonLazy();
     }
 
-    [Serializable]
-    public class PlayerInputSettings
+    #endregion
+
+    public override void InstallBindings()
     {
-        public static float speed;
+        PlayerInputInstall();
     }
 }
