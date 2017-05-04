@@ -1,30 +1,49 @@
-using System;
 using UnityEngine;
 using Zenject;
 
-public class GameInstaller : ScriptableObjectInstaller
+public class GameInstaller : MonoInstaller
 {
-    #region Settings
+    #region Install functions
 
-    public PlayerSettings Player;
-
-    #endregion
-
-    #region Settings classes
-
-    [Serializable]
-    public class PlayerSettings
+    private void PlayerInputInstall()
     {
-        public PlayerInput PlayerInput;
+        Container.Bind<PlayerInput>().AsSingle();
+        Container.Bind<IFixedTickable>().To<PlayerInput>().AsSingle().NonLazy();
+    }
+
+    private void PlayerAimingInstall()
+    {
+        Container.Bind<PlayerAiming>().AsSingle();
+        Container.Bind<IInitializable>().To<PlayerAiming>().AsSingle().NonLazy();
+        Container.Bind<ITickable>().To<PlayerAiming>().AsSingle().NonLazy();
+    }
+
+    private void AsteroidsInstall()
+    {
+        Container.Bind<Asteroid>().AsTransient().NonLazy();
+    }
+
+    private void BulletsInstall()
+    {
+        Container.Bind<Bullet>().AsTransient().NonLazy();
+    }
+
+    private void InstallWaveInstaller()
+    {
+        Container.Bind<WaveSpawner>().AsSingle().NonLazy();
+        Container.Bind<IInitializable>().To<WaveSpawner>();
+        Container.Bind<ITickable>().To<WaveSpawner>();
     }
 
     #endregion
 
     public override void InstallBindings()
     {
-        Container.BindInstance(Player.PlayerInput);
+        //Player installs
+        PlayerInputInstall();
+        PlayerAimingInstall();
 
-        Container.Bind<PlayerInput>().AsSingle().WithArguments(Player.PlayerInput.speed).NonLazy();
-        Container.Bind<IFixedTickable>().To<PlayerInput>().AsSingle().NonLazy();
+        AsteroidsInstall();
+        BulletsInstall();
     }
 }

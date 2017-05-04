@@ -13,7 +13,7 @@ public class PlayerAiming: IInitializable, ITickable{
     public float lookAngle;
 
     public Vector3 mousePosition;
-    public Vector2 mouseDirection;
+    public Vector3 mouseDirection;
 
     #endregion
 
@@ -29,7 +29,7 @@ public class PlayerAiming: IInitializable, ITickable{
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseDirection = (mousePosition - actualPosition).normalized;
 
-        lookAngle = Vector2.Angle(Vector3.up, mouseDirection);
+        lookAngle = Vector3.Angle(Vector3.up, mouseDirection);
     }
 
     #endregion

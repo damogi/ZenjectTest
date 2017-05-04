@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class Bullet : MonoBehaviour
+public class Asteroid : MonoBehaviour
 {
-    public class Pool : MemoryPool<Bullet>
+    public class Pool : MemoryPool<Asteroid>
     {
-        //Bullet Pool
+        //Asteroid Pool
     }
 }

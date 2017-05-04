@@ -14,16 +14,11 @@ public class SpaceShip : MonoBehaviour {
 
     //Cached components
     [SerializeField]
-    private new Rigidbody2D rigidbody;
+    private new Rigidbody rigidbody;
 
     #endregion
 
     #region Unity functions
-
-    private void Start()
-    {
-        StartCoroutine(ZenjectAutodestruction());
-    }
 
     private void FixedUpdate()
     {
@@ -45,7 +40,7 @@ public class SpaceShip : MonoBehaviour {
 
     private void Shoot()
     {
-        Debug.Log("Hasta la vista Hector!");
+        //Shoot()
     }
 
     private void Move()
@@ -55,7 +50,7 @@ public class SpaceShip : MonoBehaviour {
 
     private void Rotate()
     {
-        rigidbody.MoveRotation(playerAiming.lookAngle);
+        Debug.Log("Rotate");
     }
 
     #endregion
