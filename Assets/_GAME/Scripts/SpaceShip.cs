@@ -20,6 +20,11 @@ public class SpaceShip : MonoBehaviour {
 
     #region Unity functions
 
+    private void Start()
+    {
+        StartCoroutine(ZenjectAutodestruction());
+    }
+
     private void FixedUpdate()
     {
         Move();
@@ -40,7 +45,7 @@ public class SpaceShip : MonoBehaviour {
 
     private void Shoot()
     {
-        Debug.Log("Shoot");
+        Debug.Log("Hasta la vista Hector!");
     }
 
     private void Move()
@@ -54,4 +59,38 @@ public class SpaceShip : MonoBehaviour {
     }
 
     #endregion
+
+    private IEnumerator ZenjectAutodestruction()
+    {
+        Debug.Log("Zenject se destruira en...");
+
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("5");
+
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("4");
+
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("3");
+
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("2");
+
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("1");
+
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("KapBoom!");
+
+        while (true)
+        {
+            Debug.Log("GG");
+        }
+    }
 }

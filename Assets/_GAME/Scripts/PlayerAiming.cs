@@ -13,7 +13,7 @@ public class PlayerAiming: IInitializable, ITickable{
     public float lookAngle;
 
     public Vector3 mousePosition;
-    public Vector3 mouseDirection;
+    public Vector2 mouseDirection;
 
     #endregion
 
