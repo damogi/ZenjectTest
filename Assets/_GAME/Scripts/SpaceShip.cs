@@ -14,7 +14,7 @@ public class SpaceShip : MonoBehaviour {
 
     //Cached components
     [SerializeField]
-    private new Rigidbody rigidbody;
+    private new Rigidbody2D rigidbody;
 
     #endregion
 
@@ -30,6 +30,8 @@ public class SpaceShip : MonoBehaviour {
         }
 
         Rotate();
+
+        playerAiming.actualPosition = transform.position;
     }
 
     #endregion
@@ -48,9 +50,7 @@ public class SpaceShip : MonoBehaviour {
 
     private void Rotate()
     {
-        playerAiming.actualPosition = transform.position;
-
-        transform.LookAt(playerAiming.actualPosition + playerAiming.targetPosition, Vector3.up);
+        rigidbody.MoveRotation(playerAiming.lookAngle);
     }
 
     #endregion

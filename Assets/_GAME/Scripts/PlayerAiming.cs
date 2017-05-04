@@ -9,11 +9,11 @@ public class PlayerAiming: IInitializable, ITickable{
 
     public Vector3 actualPosition;
 
-    //Raycast settings
-    private Ray ray;
-    private RaycastHit hit;
+    //Aiming settings
+    public float lookAngle;
 
-    public Vector3 targetPosition;
+    public Vector3 mousePosition;
+    public Vector3 mouseDirection;
 
     #endregion
 
@@ -21,22 +21,15 @@ public class PlayerAiming: IInitializable, ITickable{
 
     public void Initialize()
     {
-        targetPosition = Vector3.zero;
         actualPosition = Vector3.zero;
     }
 
     public void Tick()
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseDirection = (mousePosition - actualPosition).normalized;
 
-        if (Physics.Raycast(ray, out hit, 50f))
-        {
-            targetPosition = hit.point;
-        }
-
-        Vector3 targetDirection = targetPosition - actualPosition;
-
-        targetDirection.y = 0;
+        lookAngle = Vector2.Angle(Vector3.up, mouseDirection);
     }
 
     #endregion
